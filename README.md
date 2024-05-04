@@ -5,7 +5,7 @@
 Well my name starts with R, and the math part is because this library contains libraries that help you do math! yay!
 
 ### Why??
-I wanted to learn how computers calculate sine and the best way to do that is to do it yourself. Let it be known that I am not a mathematician and I dont work for IEEE so this shit is mad innacurate sometimes.
+I wanted to learn how computers calculate sine and the best way to do that is to do it yourself.
 
 ## Implemented Functions:
 - `int r_abs(int x)` - Returns the absolute value of the input
@@ -19,9 +19,11 @@ I wanted to learn how computers calculate sine and the best way to do that is to
 
 
 - `double r_sin(double x)` - Returns the sine of the input
-	- Uses the sine taylor series method up to the 7th term ($\dfrac{x^{13}}{13!}$)
+	- Uses the sine taylor series method up to the 9th term ($\dfrac{x^{17}}{17!}$)
 
 
 - `double r_cos(double x)` - Returns the cosine of the input
-	- Uses the cosine taylor series method up to the 7th term ($\dfrac{x^{12}}{12!}$)
+	- Uses the cosine taylor series method up to the 9th term ($\dfrac{x^{16}}{16!}$)
+
+- `double r_tan(double x)` - Returns the tangent of the input
 

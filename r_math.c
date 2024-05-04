@@ -1,4 +1,5 @@
 #include "r_math.h"
+#include <alloca.h>
 
 int r_abs(int x) {
     if (x == 0) return 0;
@@ -36,7 +37,7 @@ long long factorial(int x) {
 double r_sin(double x) {
     double retval = x;
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
         if (!(i % 2))
             retval -= r_pow(x, (i * 2) + 3) / factorial((i * 2) + 3);
 
@@ -44,9 +45,9 @@ double r_sin(double x) {
             retval += r_pow(x, (i * 2) + 3) / factorial((i * 2) + 3);
     }
 
-    retval += r_pow(x, 9) / FACTORIAL_9;
-    retval -= r_pow(x, 11) / FACTORIAL_11;
     retval += r_pow(x, 13) / FACTORIAL_13;
+    retval -= r_pow(x, 15) / FACTORIAL_15;
+    retval += r_pow(x, 17) / FACTORIAL_17;
 
     return retval;
 }
@@ -54,7 +55,7 @@ double r_sin(double x) {
 double r_cos(double x) {
     double retval = 1;
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
         if (!(i % 2))
             retval -= r_pow(x, (i * 2) + 2) / factorial((i * 2) + 2);
 
@@ -62,9 +63,15 @@ double r_cos(double x) {
             retval += r_pow(x, (i * 2) + 2) / factorial((i * 2) + 2);
     }
 
-    retval += r_pow(x, 8) / FACTORIAL_8;
-    retval -= r_pow(x, 10) / FACTORIAL_10;
     retval += r_pow(x, 12) / FACTORIAL_12;
+    retval -= r_pow(x, 14) / FACTORIAL_14;
+    retval += r_pow(x, 16) / FACTORIAL_16;
 
+    return retval;
+}
+
+double r_tan(double x) {
+    double retval = r_sin(x);
+    retval /= r_cos(x);
     return retval;
 }
