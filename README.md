@@ -33,7 +33,7 @@ I wanted to learn how computers calculate sine and the best way to do that is to
 
 - `void DerivePolynomial(const poly_t p_x, poly_t *d_px)` - Finds the derivative of p_x and stores it in the polynomial at d_px
 	- p_x = $P(x)$
-	- d_px = $P`(x)$
+	- d_px = $P^{'}(x)$
 
 ## Implemented Types:
 
