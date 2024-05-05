@@ -75,7 +75,7 @@ double r_tan(double x) {
     return retval;
 }
 
-double EvaluatePolynomial(const poly_t p_x, double x) {
+double p_eval(const poly_t p_x, double x) {
     if (p_x.k == 0) return p_x.coef[0];
 
     double retval = 0;
@@ -85,7 +85,7 @@ double EvaluatePolynomial(const poly_t p_x, double x) {
     return retval;
 }
 
-void DerivePolynomial(const poly_t p_x, poly_t *d_px) {
+void p_derive(const poly_t p_x, poly_t *d_px) {
     if (p_x.k == 0) {
         d_px->k = p_x.coef[0];
         d_px->coef = NULL;
@@ -106,7 +106,7 @@ void DerivePolynomial(const poly_t p_x, poly_t *d_px) {
     return;
 }
 
-void PrintPolynomial(const poly_t p_x) {
+void p_print(const poly_t p_x) {
     if (p_x.k == 0) {
         if ((int)p_x.coef[0] != p_x.coef[0]) printf("%.3lf\n", p_x.coef[0]);
         else printf("%.0lf\n", p_x.coef[0]);
@@ -159,7 +159,7 @@ void PrintPolynomial(const poly_t p_x) {
     }
 }
 
-void AntiderivePolynomial(const poly_t p_x, poly_t *P_x) {
+void p_antiderive(const poly_t p_x, poly_t *P_x) {
     P_x->k = p_x.k + 1;
     P_x->coef = malloc((P_x->k + 1) * sizeof(double));
 
@@ -174,4 +174,36 @@ void AntiderivePolynomial(const poly_t p_x, poly_t *P_x) {
         P_x->coef[i] = p_x.coef[i - 1] / i;
     }
     return;
+}
+
+void p_free(poly_t p_x) {
+    free(p_x.coef);
+    return;
+}
+
+poly_t p_add(const poly_t p_x1, const poly_t p_x2) {
+    poly_t sum;
+
+    if (p_x1.k >= p_x2.k)
+        sum.k = p_x1.k;
+    else sum.k = p_x2.k;
+
+    sum.coef = malloc((sum.k + 1) * sizeof(double));
+
+    if (sum.k >= p_x2.k) {
+        for (int i = sum.k; i > sum.k - p_x2.k; i--)
+            sum.coef[i] = p_x1.coef[i];
+
+        for (int i = sum.k - (sum.k - p_x2.k); i >= 0; i--)
+            sum.coef[i] = p_x1.coef[i] + p_x2.coef[i];
+    }
+    else {
+        for (int i = p_x2.k; i > p_x2.k - sum.k; i--)
+            sum.coef[i] = p_x2.coef[i];
+
+        for (int i = p_x2.k - (p_x2.k - sum.k); i >= 0; i++)
+            sum.coef[i] = p_x2.coef[i] + p_x1.coef[i];
+    }
+
+    return sum;
 }
