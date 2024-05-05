@@ -44,7 +44,7 @@ I wanted to learn how computers calculate sine and the best way to do that is to
 ~~~
 	typedef struct Polynomial {
 		uint8_t k;
-		int32_t *coef;
+		double *coef;
 	} poly_t;
 ~~~
 
