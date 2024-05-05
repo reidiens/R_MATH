@@ -27,3 +27,10 @@ I wanted to learn how computers calculate sine and the best way to do that is to
 
 - `double r_tan(double x)` - Returns the tangent of the input
 
+- `double EvaluatePolynomial(const poly_t p_x, double x)` - Returns the value of the polynomial at the given value for x
+
+- `void PrintPolynomial(const poly_t p_x)` - Prints the polynomial in the format $ax^{k}+bx^{k-1}+cx^{k-2}+...$
+
+- `void DerivePolynomial(const poly_t p_x, poly_t *d_px)` - Finds the derivative of p_x and stores it in the polynomial at d_px
+	- p_x = $P(x)$
+	- d_px = $P`(x)$
