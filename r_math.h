@@ -24,10 +24,10 @@
 
     typedef struct Polynomial {
         uint8_t k;      // degree of the polynomial
-        int32_t *coef;  // dynamically alloc'd array of size (k + 1) that stores the coefficients
+        double *coef;  // dynamically alloc'd array of size (k + 1) that stores the coefficients
     } poly_t;
 
-    int r_abs(int x);
+    double r_abs(double x);
     double r_pow(double base, int power);
     long long factorial(int x);
     double r_sin(double x);
@@ -36,6 +36,7 @@
     double EvaluatePolynomial(const poly_t p_x, double x);
     void DerivePolynomial(const poly_t p_x, poly_t *d_px);
     void PrintPolynomial(const poly_t p_x);
+    void AntiderivePolynomial(const poly_t p_x, poly_t *P_x);
 
     #endif
 #endif

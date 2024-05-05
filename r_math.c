@@ -1,9 +1,9 @@
 #include "r_math.h"
 
-int r_abs(int x) {
+double r_abs(double x) {
     if (x == 0) return 0;
     if (x > 0) return x;
-    int retval = x * -2;
+    double retval = x * -2;
     retval /= 2;
     return retval; 
 }
@@ -85,42 +85,6 @@ double EvaluatePolynomial(const poly_t p_x, double x) {
     return retval;
 }
 
-void PrintPolynomial(const poly_t p_x) {
-    if (p_x.k == 0) {
-        printf("%d\n", p_x.coef[0]);
-        return;
-    }
-
-    if (p_x.coef[p_x.k] == 1) {
-        if (p_x.k == 1) printf("x ");
-        else printf("x^%d ", p_x.k);
-    }
-    else {
-        if (p_x.k == 1) printf("%dx ", p_x.coef[p_x.k]);
-        else printf("%dx^%d ", p_x.coef[p_x.k], p_x.k);
-    }
-
-    for (int i = p_x.k - 1; i >= 0; i--) {
-        if (p_x.coef[i] == 0) continue;
-
-        if (i == 0) {
-            printf("%s %d\n", (p_x.coef[i] > 0) ? "+" : "-", r_abs(p_x.coef[i]));
-            break;
-        }
-
-        printf("%s ", (p_x.coef[i] > 0) ? "+" : "-");
-
-        if (p_x.coef[i] == 1) {
-            if (i == 1) printf("x ");
-            else printf("x^%d ", i);
-        }
-        else {
-            if (i == 1) printf("%dx ", r_abs(p_x.coef[i]));
-            else printf("%dx^%d ", r_abs(p_x.coef[i]), i);
-        }
-    }
-}
-
 void DerivePolynomial(const poly_t p_x, poly_t *d_px) {
     if (p_x.k == 0) {
         d_px->k = p_x.coef[0];
@@ -134,10 +98,80 @@ void DerivePolynomial(const poly_t p_x, poly_t *d_px) {
     }
 
     d_px->k = p_x.k - 1;
-    d_px->coef = malloc(p_x.k * sizeof(int32_t));
+    d_px->coef = malloc(p_x.k * sizeof(double));
 
     for (int i = d_px->k; i >= 0; i--)
          d_px->coef[i] = p_x.coef[i + 1] * (p_x.k - (p_x.k - (i + 1)));
     
+    return;
+}
+
+void PrintPolynomial(const poly_t p_x) {
+    if (p_x.k == 0) {
+        if ((int)p_x.coef[0] != p_x.coef[0]) printf("%.3lf\n", p_x.coef[0]);
+        else printf("%.0lf\n", p_x.coef[0]);
+        return;
+    }
+
+    if (p_x.coef[p_x.k] == 1) {
+        if (p_x.k == 1) printf("x ");
+        else printf("x^%d ", p_x.k);
+    }
+    else {
+        if ((int)p_x.coef[p_x.k] != p_x.coef[p_x.k]) {
+            if (p_x.k == 1) printf("%.3lfx ", p_x.coef[p_x.k]);
+            else printf("%.3lfx^%d ", p_x.coef[p_x.k], p_x.k);
+        }
+        else {
+            if (p_x.k == 1) printf("%.0lfx ", p_x.coef[p_x.k]);
+            else printf("%.0lfx^%d ", p_x.coef[p_x.k], p_x.k);
+        }
+    }
+
+    for (int i = p_x.k - 1; i >= 0; i--) {
+        if (p_x.coef[i] == 0) continue;
+
+        if (i == 0) {
+            printf("%s ", (p_x.coef[i] > 0) ? "+" : "-");
+
+            if ((int)p_x.coef[i] != p_x.coef[i]) printf("%.3lf\n", r_abs(p_x.coef[i]));
+            else printf("%.0lf\n", r_abs(p_x.coef[i]));           
+
+            break;
+        }
+
+        printf("%s ", (p_x.coef[i] > 0) ? "+" : "-");
+
+        if (p_x.coef[i] == 1) {
+            if (i == 1) printf("x ");
+            else printf("x^%d ", i);
+        }
+        else {
+            if ((int)p_x.coef[i] != p_x.coef[i]) {
+                if (i == 1) printf("%.3lfx ", r_abs(p_x.coef[i]));
+                else printf("%.3lfx^%d ", r_abs(p_x.coef[i]), i);
+            }
+            else {
+                if (i == 1) printf("%.0lfx ", r_abs(p_x.coef[i]));
+                else printf("%.0lfx^%d ", r_abs(p_x.coef[i]), i);
+            }
+        }
+    }
+}
+
+void AntiderivePolynomial(const poly_t p_x, poly_t *P_x) {
+    P_x->k = p_x.k + 1;
+    P_x->coef = malloc((P_x->k + 1) * sizeof(double));
+
+    for (int i = P_x->k; i >= 0; i--) {
+        if (i == 0) {
+            P_x->coef[0] = 0;
+            break;
+        }
+
+        if (p_x.coef[i - 1] == 0) continue;
+
+        P_x->coef[i] = p_x.coef[i - 1] / i;
+    }
     return;
 }
