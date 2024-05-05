@@ -8,7 +8,7 @@ Well my name starts with R, and the math part is because this library contains l
 I wanted to learn how computers calculate sine and the best way to do that is to do it yourself.
 
 ## Implemented Functions:
-- `int r_abs(int x)` - Returns the absolute value of the input
+- `double r_abs(double x)` - Returns the absolute value of the input
 
 
 - `double r_pow(double base, int power)` - Raises the base to the power
@@ -33,7 +33,9 @@ I wanted to learn how computers calculate sine and the best way to do that is to
 
 - `void DerivePolynomial(const poly_t p_x, poly_t *d_px)` - Finds the derivative of p_x and stores it in the polynomial at d_px
 	- p_x = $P(x)$
-	- d_px = $P'(x)$
+	- d_px = $P`(x)$
+
+- `void AntiderivePolynomial(const poly_t p_x, poly_t *P_x)` - Finds the antiderivative of p_x and stores it in P_x
 
 ## Implemented Types:
 
@@ -48,4 +50,4 @@ I wanted to learn how computers calculate sine and the best way to do that is to
 
 This type is the basis for polynomials. The element `k` stores the degree of the polynomial. `coef` is a dynamically allocated array storing the coefficients in the polynomial.
 
-The size of `coef` is (k + 1). The element specified by `coef[k]` is the coefficient corresponding to that exponent in the polynomial. For example, for the polynomial $4x{3}-5x^{2}+7$ the value stored at `coef[3]` would be 4, and the value for `coef[1]` would be 0.
+The size of `coef` is (`k` + 1). The element specified by `coef[k]` is the coefficient corresponding to that exponent in the polynomial. For example, for the polynomial $4x{3}-5x^{2}+7$ the value stored at `coef[3]` would be 4, and the value for `coef[1]` would be 0.
