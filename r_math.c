@@ -1,5 +1,4 @@
 #include "r_math.h"
-#include <alloca.h>
 
 int r_abs(int x) {
     if (x == 0) return 0;
@@ -74,4 +73,71 @@ double r_tan(double x) {
     double retval = r_sin(x);
     retval /= r_cos(x);
     return retval;
+}
+
+double EvaluatePolynomial(const poly_t p_x, double x) {
+    if (p_x.k == 0) return p_x.coef[0];
+
+    double retval = 0;
+    for (int i = 0; i < p_x.k; i++)
+        retval += p_x.coef[i] * r_pow(x, i);
+
+    return retval;
+}
+
+void PrintPolynomial(const poly_t p_x) {
+    if (p_x.k == 0) {
+        printf("%d\n", p_x.coef[0]);
+        return;
+    }
+
+    if (p_x.coef[p_x.k] == 1) {
+        if (p_x.k == 1) printf("x ");
+        else printf("x^%d ", p_x.k);
+    }
+    else {
+        if (p_x.k == 1) printf("%dx ", p_x.coef[p_x.k]);
+        else printf("%dx^%d ", p_x.coef[p_x.k], p_x.k);
+    }
+
+    for (int i = p_x.k - 1; i >= 0; i--) {
+        if (p_x.coef[i] == 0) continue;
+
+        if (i == 0) {
+            printf("%s %d\n", (p_x.coef[i] > 0) ? "+" : "-", r_abs(p_x.coef[i]));
+            break;
+        }
+
+        printf("%s ", (p_x.coef[i] > 0) ? "+" : "-");
+
+        if (p_x.coef[i] == 1) {
+            if (i == 1) printf("x ");
+            else printf("x^%d ", i);
+        }
+        else {
+            if (i == 1) printf("%dx ", r_abs(p_x.coef[i]));
+            else printf("%dx^%d ", r_abs(p_x.coef[i]), i);
+        }
+    }
+}
+
+void DerivePolynomial(const poly_t p_x, poly_t *d_px) {
+    if (p_x.k == 0) {
+        d_px->k = p_x.coef[0];
+        d_px->coef = NULL;
+        return;
+    }
+    else if (p_x.k == 1) {
+        d_px->k = p_x.coef[1];
+        d_px->coef = NULL;
+        return;
+    }
+
+    d_px->k = p_x.k - 1;
+    d_px->coef = malloc(p_x.k * sizeof(int32_t));
+
+    for (int i = d_px->k; i >= 0; i--)
+         d_px->coef[i] = p_x.coef[i + 1] * (p_x.k - (p_x.k - (i + 1)));
+    
+    return;
 }
