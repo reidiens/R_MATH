@@ -34,3 +34,18 @@ I wanted to learn how computers calculate sine and the best way to do that is to
 - `void DerivePolynomial(const poly_t p_x, poly_t *d_px)` - Finds the derivative of p_x and stores it in the polynomial at d_px
 	- p_x = $P(x)$
 	- d_px = $P`(x)$
+
+## Implemented Types:
+
+### `poly_t`
+
+~~~
+	typedef struct Polynomial {
+		uint8_t k;
+		int32_t *coef;
+	} poly_t;
+~~~
+
+This type is the basis for polynomials. The element `k` stores the degree of the polynomial. `coef` is a dynamically allocated array storing the coefficients in the polynomial.
+
+The size of `coef` is (`k` + 1). The element specified by `coef[k]` is the coefficient corresponding to that exponent in the polynomial. For example, for the polynomial $4x{3}-5x^{2}+7$ the value stored at `coef[3]` would be 4, and the value for `coef[1]` would be 0.
