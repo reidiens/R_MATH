@@ -33,12 +33,15 @@
     double r_sin(double x);
     double r_cos(double x);
     double r_tan(double x);
-    double p_eval(const poly_t p_x, double x);
-    void p_derive(const poly_t p_x, poly_t *d_px);
-    void p_print(const poly_t p_x);
-    void p_antiderive(const poly_t p_x, poly_t *P_x);
-    void p_free(poly_t p_x);
-    poly_t p_add(const poly_t p_x1, const poly_t p_x2);
+    poly_t* p_create(uint8_t k);
+    void p_free(poly_t* p_x);
+    double p_eval(const poly_t* p_x, double x);
+    poly_t* p_derive(const poly_t *p_x);
+    void p_print(const poly_t *p_x);
+    poly_t* p_antiderive(const poly_t *p_x);
+    poly_t* p_add(const poly_t *p_x1, const poly_t *p_x2);
+    poly_t* p_negate(const poly_t *p_x);
+    poly_t* p_sub(const poly_t *px1, const poly_t *px2);
 
     #endif
 #endif
