@@ -1,5 +1,5 @@
 # R_MATH
-## A math library written in C
+## A math library with polynomial support written in C
 
 ### What does R_MATH mean?
 Well my name starts with R, and the math part is because this library contains libraries that help you do math! yay!
