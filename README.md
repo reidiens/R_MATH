@@ -68,3 +68,5 @@ The size of `coef` is $k + 1$. The element specified by `coef[k]` is the coeffic
  - add sqrt
  - add integrals
  - fix antiderivative function
+ - perhaps add multivariable polynomials perhaps? perchance
+ - non-polynomial functions 
