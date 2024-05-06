@@ -5,7 +5,7 @@
 Well my name starts with R, and the math part is because this library contains libraries that help you do math! yay!
 
 ### Why??
-I wanted to learn how computers calculate sine and the best way to do that is to do it yourself.
+I wanted to learn how computers calculate sine and the best way to do that is to do it yourself. then i got a little carried away.
 
 ## Implemented Functions:
 - `double r_abs(double x)` - Returns the absolute value of the input
